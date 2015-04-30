@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-import os
 import argparse
+import os
+
+from walkdir import filtered_walk
+
 
 parser = argparse.ArgumentParser(description='Print the directory tree code for the LaTeX dirtree package.')
 parser.add_argument(dest='path', type=str, help="Root directory of the tree")
@@ -8,11 +11,13 @@ parser.add_argument('-d', '--maxDepth', dest='maxDepth', type=int, help="Max dep
 parser.add_argument('-H', '--includeHidden', dest='includeHidden', action='store_true', help='Include hidden files')
 parser.add_argument('-S', '--includeSystem', dest='includeSystem', action='store_true', help='Include system files')
 
-rootDir = parser.parse_args().path  # I should verify if this is a valid path
-includeHidden = parser.parse_args().includeHidden
-includeSystem = parser.parse_args().includeSystem
+system_file_names = [".DS_Store"]
 
-indentChar = " "
+# Delete trailing / in rootDir which can lead to errors
+def delete_trailing_slash(path_name):
+    while path_name.endswith('/'):
+        path_name = path_name[:-1]
+    return path_name
 
 
 # Count how many levels deep is the directory with respect to dirRoot
@@ -28,38 +33,48 @@ def escape_illegal(name):
     return name
 
 
-# Return true if the file is system file
-def is_system_file(file_name):
-    system_file_names = [".DS_Store"]
-    for sfn in system_file_names:
-        if file_name == sfn:
-            return True
-    return False
+rootDir = delete_trailing_slash(parser.parse_args().path)
+includeHidden = parser.parse_args().includeHidden
+includeSystem = parser.parse_args().includeSystem
+maxDepth = parser.parse_args().maxDepth
 
+# if the directory exists
+if os.path.isdir(rootDir) and os.path.exists(rootDir):
 
-# Return true if the file is hidden
-def is_hidden(file_name):
-    return file_name[0] == "."
+    indentChar = " "
 
+    # Depth of the root (i.e. number of "/")
+    levelOffset = rootDir.count(os.path.sep) - 1
 
-levelOffset = rootDir.count(os.path.sep) - 1
+    # Create filter
+    excluded_filter = []
+    if not includeHidden:
+        excluded_filter.append(".*")
+    if not includeSystem:
+        excluded_filter += system_file_names
 
-print "\dirtree{%"
+    print "\dirtree{%"
+    for dirName, subdirList, fileList in filtered_walk(rootDir, depth=maxDepth, excluded_dirs=excluded_filter,
+                                                       excluded_files=excluded_filter):
 
-for dirName, subdirList, fileList in os.walk(rootDir):
+        level = get_relative_depth(dirName, levelOffset)
 
-    level = get_relative_depth(dirName, levelOffset)
-
-    if level == 1:  # for the first level only print the whole path
-        print(indentChar + "." + str(level) + " " + escape_illegal(rootDir) + " .")
-    else:
         baseName = os.path.basename(dirName)
-        if includeHidden or not is_hidden(baseName):
-            print(indentChar * level + "." + str(level) + " " + escape_illegal(baseName) + " .")
 
-    level += 1
-    for fileName in fileList:
-        if (includeHidden or not is_hidden(fileName)) and (includeSystem or not is_system_file(fileName)):
+        if level == 1:  # for the first level only print the whole path
+            print(indentChar + "." + str(level) + " " + escape_illegal(dirName) + " .")
+        else:
+            print(indentChar * level + "." + str(level) + " " + escape_illegal((os.path.basename(dirName))) + " .")
+
+        level += 1
+        for fileName in fileList:
             print(indentChar * level + "." + str(level) + " " + escape_illegal(fileName) + " .")
+    print "}"
+else:
+    print ("Error: root directory not found")
 
-print "}"
+
+
+
+
+
