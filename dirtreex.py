@@ -5,7 +5,7 @@ import os
 from walkdir import filtered_walk
 
 
-parser = argparse.ArgumentParser(description='Print the directory tree code for the LaTeX dirtree package.')
+parser = argparse.ArgumentParser(description='Print the directory-tree code for the LaTeX dirtree package.')
 parser.add_argument(dest='path', type=str, help="Root directory of the tree")
 parser.add_argument('-d', '--maxDepth', dest='maxDepth', type=int, help="Max depth for tree expansion")
 parser.add_argument('-H', '--includeHidden', dest='includeHidden', action='store_true', help='Include hidden files')
