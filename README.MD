@@ -22,6 +22,7 @@ A python script that automagically  generates the code to represent a directory 
     }
 
 The previouse code renders in LaTeX as follows:
+
 ![tree_in_latex](./img/latex_result.png)
 
 ## Are there any optional arguments?
@@ -54,7 +55,7 @@ Obviously you will need [Python](https://www.python.org/downloads/) (tested on 2
     pip install walkdir
 
 ### Download the script:
-Direct link [here](./dirtree.py) or checkout the repository.
+Direct link [here](https://raw.githubusercontent.com/dimatteomaurizio/dirtreex/master/dirtreex.py) or checkout the repository.
 
 ### Run it:
 
