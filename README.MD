@@ -5,9 +5,9 @@ A directory-tree generation script for LaTeX
 A python script that automagically  generates the code to represent a directory tree in LaTeX using the [dirtree](http://get-software.net/macros/generic/dirtree/dirtree.pdf) package.
 
 ## Give me an example!
-    > python dirtreex.py /Users/Me/myDir
+    > python dirtreex.py /Users/me/myDir
     \dirtree{%
-     .1 /Users/Me/myDir .
+     .1 /Users/me/myDir .
       .2 A .
        .3 A1 .
        .3 A2 .
