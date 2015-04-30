@@ -67,4 +67,4 @@ the other way:
     
     > sudo chmod +x /path/to/script/dirtreex.py
     > mv /path/to/script/dirtree.py /usr/local/bin
-    > ditreex.py /treeRoot
+    > dirtreex.py /treeRoot
