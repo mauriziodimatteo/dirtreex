@@ -21,7 +21,7 @@ A python script that automagically  generates the code to represent a directory 
         .4 gamma .
     }
 
-The previouse code renders in LaTeX as follows:
+The previous code renders in LaTeX as follows:
 
 ![tree_in_latex](./img/latex_result.png)
 
