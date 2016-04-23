@@ -4,7 +4,6 @@ import os
 
 from walkdir import filtered_walk
 
-
 parser = argparse.ArgumentParser(description='Print the directory-tree code for the LaTeX dirtree package.')
 parser.add_argument(dest='path', type=str, help="Root directory of the tree")
 parser.add_argument('-d', '--maxDepth', dest='maxDepth', type=int, help="Max depth for tree expansion")
@@ -12,6 +11,7 @@ parser.add_argument('-H', '--includeHidden', dest='includeHidden', action='store
 parser.add_argument('-S', '--includeSystem', dest='includeSystem', action='store_true', help='Include system files')
 
 system_file_names = [".DS_Store"]
+
 
 # Delete trailing / in rootDir which can lead to errors
 def delete_trailing_slash(path_name):
@@ -72,9 +72,3 @@ if os.path.isdir(rootDir) and os.path.exists(rootDir):
     print "}"
 else:
     print ("Error: root directory not found")
-
-
-
-
-
-
