@@ -53,7 +53,7 @@ if os.path.isdir(rootDir) and os.path.exists(rootDir):
     if not includeSystem:
         excluded_filter += system_file_names
 
-    print "\dirtree{%"
+    print ("\dirtree{%")
     for dirName, subdirList, fileList in filtered_walk(rootDir, depth=maxDepth, excluded_dirs=excluded_filter,
                                                        excluded_files=excluded_filter):
 
@@ -69,6 +69,6 @@ if os.path.isdir(rootDir) and os.path.exists(rootDir):
         level += 1
         for fileName in fileList:
             print(indentChar * level + "." + str(level) + " " + escape_illegal(fileName) + " .")
-    print "}"
+    print ("}")
 else:
     print ("Error: root directory not found")
