@@ -7,18 +7,18 @@ A python script that automagically  generates the code to represent a directory 
 ## Give me an example!
     > python dirtreex.py /Users/me/myDir
     \dirtree{%
-     .1 /Users/me/myDir .
-      .2 A .
-       .3 A1 .
-       .3 A2 .
-       .3 A3 .
-      .2 B .
-       .3 B1 .
-        .4 B1.2 .
-         .5 beta .
-      .2 C .
-       .3 a:b:c .
-        .4 gamma .
+     .1 {/Users/me/myDir} .
+      .2 {A} .
+       .3 {A1} .
+       .3 {A2} .
+       .3 {A3} .
+      .2 {B} .
+       .3 {B1} .
+        .4 {B1.2} .
+         .5 {beta} .
+      .2 {C} .
+       .3 {a:b:c} .
+        .4 {gamma} .
     }
 
 The previous code renders in LaTeX as follows:
