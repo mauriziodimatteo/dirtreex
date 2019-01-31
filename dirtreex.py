@@ -54,8 +54,8 @@ if os.path.isdir(rootDir) and os.path.exists(rootDir):
         excluded_filter += system_file_names
 
     print ("\dirtree{%")
-    for dirName, subdirList, fileList in filtered_walk(rootDir, depth=maxDepth, excluded_dirs=excluded_filter,
-                                                       excluded_files=excluded_filter):
+    for dirName, subdirList, fileList in sorted(filtered_walk(rootDir, depth=maxDepth, excluded_dirs=excluded_filter,
+                                                       excluded_files=excluded_filter)):
 
         level = get_relative_depth(dirName, levelOffset)
 
@@ -67,7 +67,7 @@ if os.path.isdir(rootDir) and os.path.exists(rootDir):
             print(indentChar * level + "." + str(level) + " " + escape_illegal((os.path.basename(dirName))) + " .")
 
         level += 1
-        for fileName in fileList:
+        for fileName in sorted(fileList):
             print(indentChar * level + "." + str(level) + " " + escape_illegal(fileName) + " .")
     print ("}")
 else:
