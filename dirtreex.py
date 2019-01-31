@@ -62,13 +62,13 @@ if os.path.isdir(rootDir) and os.path.exists(rootDir):
         baseName = os.path.basename(dirName)
 
         if level == 1:  # for the first level only print the whole path
-            print(indentChar + "." + str(level) + " " + escape_illegal(dirName) + " .")
+            print(indentChar + "." + str(level) + " {" + escape_illegal(dirName) + "} .")
         else:
-            print(indentChar * level + "." + str(level) + " " + escape_illegal((os.path.basename(dirName))) + " .")
+            print(indentChar * level + "." + str(level) + " {" + escape_illegal((os.path.basename(dirName))) + "} .")
 
         level += 1
         for fileName in sorted(fileList):
-            print(indentChar * level + "." + str(level) + " " + escape_illegal(fileName) + " .")
+            print(indentChar * level + "." + str(level) + " {" + escape_illegal(fileName) + "} .")
     print ("}")
 else:
     print ("Error: root directory not found")
